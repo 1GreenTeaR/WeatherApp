@@ -19,7 +19,9 @@ export function WeatherDetailsItem({ name, value, unit, className }: Props) {
 }
 
 const Wrapper = style.div<{}>`
-    justify-items:center;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
 
   .info {
     display: flex;

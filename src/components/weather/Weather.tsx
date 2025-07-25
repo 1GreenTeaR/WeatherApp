@@ -25,7 +25,7 @@ export function Weather({ data }: Props) {
         }
         unit={data.properties.meta.units.air_temperature}
         icon={
-          data.properties.timeseries[0].data.next_1_hours.summary.symbol_code
+          data.properties.timeseries[0].data?.next_1_hours.summary.symbol_code ?? data.properties.timeseries[0].data.next_6_hours.summary.symbol_code
         }
       ></WeatherCurrent>
       <WeatherDetails
@@ -34,8 +34,7 @@ export function Weather({ data }: Props) {
           data.properties.timeseries[0].data.instant.details.relative_humidity
         }
         precipitation={
-          data.properties.timeseries[0].data.next_1_hours.details
-            ?.precipitation_amount ?? 0
+          (data.properties.timeseries[0].data?.next_1_hours.details ?? data.properties.timeseries[0].data.next_6_hours.details)?.precipitation_amount ?? 0
         }
       ></WeatherDetails>
       <WeatherChart

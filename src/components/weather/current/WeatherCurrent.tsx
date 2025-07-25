@@ -45,11 +45,16 @@ const Wrapper = style.div<{}>`
     font-size: 16px;
     font-weight: ${(props) => props.theme.typography.fontWeightBold};
     text-transform: capitalize;
+    white-space: nowrap;
+    max-width: 280px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .icon-container {
     /* height: 100px; */
     width: 200px;
     position: relative;
+    // filter: brightness(0) invert() brightness(80%);
   }
   .icon{
     width: 240px;
@@ -67,6 +72,7 @@ const Wrapper = style.div<{}>`
     font-size:100px;
     line-height: 1;
     font-weight: ${(props) => props.theme.typography.fontWeightBold};
+    
   }
   .unit {
     padding-top: 6px;
@@ -74,7 +80,8 @@ const Wrapper = style.div<{}>`
     font-weight: ${(props) => props.theme.typography.fontWeightBold}
   }
   .temp-container{
-    display:flex
+    display:flex;
+    justify-content: flex-end;
   }
   @media only screen and (max-width: 400px) {
     .icon{
@@ -88,6 +95,7 @@ const Wrapper = style.div<{}>`
     }
     .weather-text{
       font-size: 14px;
+      max-width: 200px;
     }
     .temp{
       font-size: 80px;

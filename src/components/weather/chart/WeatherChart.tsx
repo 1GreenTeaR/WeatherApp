@@ -18,7 +18,7 @@ import {
 import { useState } from "preact/hooks";
 import type { WeatherData } from "../../../app";
 
-import { Icon } from "../../../ui/icon";
+import { Icon } from "../../../ui/Icon";
 
 function Point({ x, y }: { x: number; y: number }) {
   const scaleX = useXScale();
@@ -128,7 +128,7 @@ export function WeatherChart({ dailyData }: Props) {
                 valueFormatter: (hours) => hours + ":00",
                 scaleType: "point",
                 tickLabelInterval: (v, i) =>
-                  dailyData.length === 24 ? (i + 3) % 4 === 0 : true,
+                  dailyData.length > 12 ? (i + 3) % 4 === 0 : true,
               },
             ]}
             yAxis={[{ position: "none" }]}
@@ -136,7 +136,7 @@ export function WeatherChart({ dailyData }: Props) {
               {
                 data: dailyData.map((d) =>
                   value === "precipitation"
-                    ? d.data.next_1_hours.details.precipitation_amount
+                    ? d.data.next_1_hours?.details.precipitation_amount ?? d.data.next_6_hours?.details.precipitation_amount
                     : properties[value].shouldRound
                     ? Math.round(d.data.instant.details[selectors[value]])
                     : d.data.instant.details[selectors[value]]
@@ -201,7 +201,7 @@ export function WeatherChart({ dailyData }: Props) {
             </ChartsSurface>
             <LabelMarks
               shouldMarkRender={
-                dailyData.length === 24 ? (i) => (i + 1) % 2 === 0 : undefined
+                dailyData.length > 12 ? (i) => (i + 1) % 2 === 0 : undefined
               }
             />
           </ChartDataProvider>

@@ -109,6 +109,10 @@ export type WeatherData = {
           details: Partial<WeatherDetails> & { precipitation_amount: number };
           summary: { symbol_code: string };
         };
+        next_6_hours: {
+          details: Partial<WeatherDetails> & { precipitation_amount: number };
+          summary: { symbol_code: string };
+        };
       };
     }[];
   };
