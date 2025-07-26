@@ -1,15 +1,15 @@
-import { Button, Paper, styled, type Theme } from "@mui/material";
 import style from "styled-components";
 
 type Props = {
   unit: "celsius" | "fahrenheit";
   temp: number;
   icon: string;
+  className?: string;
 };
 
-export function WeatherCurrent({ unit, temp, icon }: Props) {
+export function WeatherCurrent({ unit, temp, icon, className }: Props) {
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <div className="box">
         <div className="icon-container">
           <img

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useLayoutEffect, useState } from "preact/hooks";
 import "./app.css";
 import {
   type Theme,
@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { Weather } from "./components/weather/Weather";
 import { ThemeProvider } from "styled-components";
+import { useCustomPointer } from "./hooks/useCustomPointer";
 
 const baseTheme = createTheme({
   typography: {
@@ -119,8 +120,9 @@ export type WeatherData = {
 };
 
 export function App() {
-  const [count, setCount] = useState(0);
   const [data, setData] = useState<WeatherData | undefined>(undefined);
+
+  useCustomPointer();
 
   useEffect(() => {
     fetch(

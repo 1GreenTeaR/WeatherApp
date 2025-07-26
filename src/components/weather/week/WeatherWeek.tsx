@@ -1,7 +1,6 @@
 import { Tab, Tabs } from "@mui/material";
 import style from "styled-components";
 import type { WeatherData } from "../../../app";
-import { Icon } from "../../../ui/Icon";
 
 const dayDisplayNames: { [key: number]: string } = {
   1: "Mon",
@@ -25,9 +24,10 @@ type Props = {
   date: string;
   timeseries: WeatherData["properties"]["timeseries"];
   onChange: (value: string) => void;
+  className?: string;
 };
 
-export function WeatherWeek({ date, timeseries, onChange }: Props) {
+export function WeatherWeek({ date, timeseries, onChange, className }: Props) {
   // [{}, {}] -> ['08.07.2025', '09.07.2025']
   const dates = timeseries.map((t) => ({
     date: new Date(t.time),
@@ -77,7 +77,7 @@ export function WeatherWeek({ date, timeseries, onChange }: Props) {
   console.log(availableDates);
   // console.log(dates);
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <div className="box">
         <Tabs
           value={date}
@@ -91,14 +91,14 @@ export function WeatherWeek({ date, timeseries, onChange }: Props) {
             const iconNames = Object.keys(a.icons);
             let mostCommonIcon = iconNames[0];
             for (let i = 1; i < iconNames.length; i++) {
-              if(a.icons[mostCommonIcon] < a.icons[iconNames[i]]){
-                mostCommonIcon = iconNames[i]
+              if (a.icons[mostCommonIcon] < a.icons[iconNames[i]]) {
+                mostCommonIcon = iconNames[i];
               }
             }
             return (
               <Tab
                 value={a.date}
-                className="tab"
+                className="tab pointer"
                 label={
                   <div>
                     <div className="date">
@@ -108,10 +108,10 @@ export function WeatherWeek({ date, timeseries, onChange }: Props) {
                     </div>
 
                     <img
-            draggable={false}
-            src={"/icons/" + mostCommonIcon + ".svg"}
-            className="icon"
-          ></img>
+                      draggable={false}
+                      src={"/icons/" + mostCommonIcon + ".svg"}
+                      className="icon"
+                    ></img>
                     <div className="temp-info-box">
                       <div className="temp-max">{Math.round(a.maxTemp)}°</div>
                       <div className="separator">/</div>

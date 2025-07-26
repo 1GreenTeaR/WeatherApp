@@ -1,3 +1,11 @@
+* {
+  cursor: none !important;
+}
+
+.pointer {
+  transition: background-color 0.2s;
+}
+
 #app {
   display: flex;
   justify-content: center;

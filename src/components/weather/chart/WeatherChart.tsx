@@ -1,5 +1,4 @@
 import style from "styled-components";
-import { LineChart } from "@mui/x-charts/LineChart";
 import { Tab, Tabs, useTheme } from "@mui/material";
 import {
   AreaPlot,
@@ -9,7 +8,6 @@ import {
   ChartsTooltip,
   ChartsXAxis,
   LinePlot,
-  MarkPlot,
   useLineSeries,
   useXAxis,
   useXScale,
@@ -86,9 +84,12 @@ const properties = {
   },
 };
 
-type Props = { dailyData: WeatherData["properties"]["timeseries"] };
+type Props = {
+  dailyData: WeatherData["properties"]["timeseries"];
+  className?: string;
+};
 
-export function WeatherChart({ dailyData }: Props) {
+export function WeatherChart({ dailyData, className }: Props) {
   const [value, setValue] = useState<
     "temp" | "wind" | "humidity" | "precipitation"
   >("temp");
@@ -97,7 +98,7 @@ export function WeatherChart({ dailyData }: Props) {
   console.log(dailyData);
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <div className="box">
         <Tabs
           value={value}
@@ -109,7 +110,7 @@ export function WeatherChart({ dailyData }: Props) {
         >
           {Object.keys(properties).map((key) => (
             <Tab
-              className="tab-overwrite"
+              className="tab-overwrite pointer"
               value={key}
               label={
                 <Icon
@@ -136,10 +137,11 @@ export function WeatherChart({ dailyData }: Props) {
               {
                 data: dailyData.map((d) =>
                   value === "precipitation"
-                    ? d.data.next_1_hours?.details.precipitation_amount ?? d.data.next_6_hours?.details.precipitation_amount
+                    ? (d.data.next_1_hours?.details.precipitation_amount ??
+                      d.data.next_6_hours?.details.precipitation_amount)
                     : properties[value].shouldRound
-                    ? Math.round(d.data.instant.details[selectors[value]])
-                    : d.data.instant.details[selectors[value]]
+                      ? Math.round(d.data.instant.details[selectors[value]])
+                      : d.data.instant.details[selectors[value]]
                 ),
                 area: true,
                 type: "line",

@@ -1,4 +1,3 @@
-import { Button, Paper, styled, type Theme } from "@mui/material";
 import style from "styled-components";
 import { WeatherDetailsItem } from "./item/WeatherDetailsItem";
 
@@ -6,9 +5,14 @@ type Props = {
   wind: number;
   wetness: number;
   precipitation: number;
+  className?: string;
 };
 
-const items: { name: string; value: keyof Props; unit: string }[] = [
+const items: {
+  name: string;
+  value: keyof Pick<Props, "wind" | "wetness" | "precipitation">;
+  unit: string;
+}[] = [
   { name: "Wind", value: "wind", unit: "m/s" },
   { name: "Humidity", value: "wetness", unit: "%" },
   { name: "Precipitation", value: "precipitation", unit: "mm" },
@@ -16,7 +20,7 @@ const items: { name: string; value: keyof Props; unit: string }[] = [
 
 export function WeatherDetails(props: Props) {
   return (
-    <Wrapper>
+    <Wrapper className={props.className}>
       <div className="box">
         {items.map((item, index) => (
           <>
