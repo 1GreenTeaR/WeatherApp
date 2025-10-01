@@ -14,7 +14,7 @@ export function WeatherCurrent({ unit, temp, icon, className }: Props) {
         <div className="icon-container">
           <img
             draggable={false}
-            src={"/icons/" + icon + ".svg"}
+            src={import.meta.env.BASE_URL + "icons/" + icon + ".svg"}
             className="icon"
           ></img>
         </div>

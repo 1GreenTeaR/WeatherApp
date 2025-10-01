@@ -109,7 +109,12 @@ export function WeatherWeek({ date, timeseries, onChange, className }: Props) {
 
                     <img
                       draggable={false}
-                      src={"/icons/" + mostCommonIcon + ".svg"}
+                      src={
+                        import.meta.env.BASE_URL +
+                        "icons/" +
+                        mostCommonIcon +
+                        ".svg"
+                      }
                       className="icon"
                     ></img>
                     <div className="temp-info-box">
