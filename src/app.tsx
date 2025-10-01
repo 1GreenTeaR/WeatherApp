@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import "./app.css";
 import {
   type Theme,
